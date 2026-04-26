@@ -1,0 +1,6 @@
+server:
+  port: 9001
+
+eureka:
+  instance:
+    instance-id: provider-9001

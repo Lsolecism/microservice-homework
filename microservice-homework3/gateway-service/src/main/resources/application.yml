@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            inventory-service:
+              - uri: http://127.0.0.1:9001
+              - uri: http://127.0.0.1:9002
+            order-service:
+              - uri: http://127.0.0.1:9010
+    gateway:
+      routes:
+        - id: lb-route
+          uri: lb://inventory-service
+          predicates:
+            - Path=/lb/echo
+            - Method=GET
+
+        - id: path-predicate-route
+          uri: lb://inventory-service
+          predicates:
+            - Path=/predicate/path/check
+
+        - id: header-predicate-route
+          uri: lb://inventory-service
+          predicates:
+            - Path=/predicate/header/check
+            - Header=X-Auth, gateway
+
+        - id: query-predicate-route
+          uri: lb://inventory-service
+          predicates:
+            - Path=/predicate/query/check
+            - Query=from, gateway
+
+        - id: method-predicate-route
+          uri: lb://inventory-service
+          predicates:
+            - Path=/predicate/method/check
+            - Method=POST
+
+        - id: seata-route
+          uri: lb://order-service
+          predicates:
+            - Path=/seata/order/create
+            - Method=POST

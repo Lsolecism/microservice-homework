@@ -1,0 +1,6 @@
+server:
+  port: 9002
+
+eureka:
+  instance:
+    instance-id: provider-9002

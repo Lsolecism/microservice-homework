@@ -1,0 +1,27 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: consumer-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: public
+        group: DEFAULT_GROUP
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8858
+        port: 8719
+      eager: true
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

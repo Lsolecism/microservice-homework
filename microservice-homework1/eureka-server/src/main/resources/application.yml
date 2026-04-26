@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  server:
+    # For local/demo environments, disable self-preservation to avoid stale instances.
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

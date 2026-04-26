@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/inventory_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+seata:
+  enabled: true
+  tx-service-group: homework_tx_group
+  service:
+    vgroup-mapping:
+      homework_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
